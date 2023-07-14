@@ -1,10 +1,15 @@
 import React from "react";
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
 
 const App = () => {
   return (
     <div className="App">
-      <h2>Hello Disney</h2>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login />}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 };
