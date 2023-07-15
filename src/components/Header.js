@@ -1,5 +1,16 @@
 import styled from "styled-components";
+import { auth, provider } from "../firebase";
 const Header = () => {
+  const handleAuth = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
   return (
     <Nav>
       <Logo>
@@ -31,6 +42,7 @@ const Header = () => {
           <span>SERIES</span>
         </a>
       </NavMenu>
+      <Login onClick={handleAuth}>Login</Login>
     </Nav>
   );
 };
@@ -124,6 +136,21 @@ const NavMenu = styled.div`
 
   @media (max-width: 768px) {
     display: none;
+  }
+`;
+const Login = styled.a`
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+
+  &:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
   }
 `;
 
