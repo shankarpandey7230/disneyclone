@@ -1,44 +1,25 @@
 import styled from "styled-components";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectRecommend } from "../features/movie/movieSlice";
 
 const Recommends = () => {
+  const movies = useSelector(selectRecommend);
+
   return (
     <Container>
       <h4>Recommended for you</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHT0fpnhEhBQYcRhu4-zgSAe66YERRD6u__fuyZFturxr5oJrPyGgFB_sWYK2sDgmeus&usqp=CAU"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHT0fpnhEhBQYcRhu4-zgSAe66YERRD6u__fuyZFturxr5oJrPyGgFB_sWYK2sDgmeus&usqp=CAU"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHT0fpnhEhBQYcRhu4-zgSAe66YERRD6u__fuyZFturxr5oJrPyGgFB_sWYK2sDgmeus&usqp=CAU"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHT0fpnhEhBQYcRhu4-zgSAe66YERRD6u__fuyZFturxr5oJrPyGgFB_sWYK2sDgmeus&usqp=CAU"
-              alt=""
-            />
-          </Link>
-        </Wrap>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={key}>
+              {movie.id}
+              <Link to={`/detail/` + movie.id}>
+                <img src={movie.cardImg} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
